@@ -1,7 +1,8 @@
-<iframe srcdoc='<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <title>仕様書リスト</title>
   <style>
     body { font-family: sans-serif; padding: 20px; background: #f9f9f9; }
     input[type="text"] {
@@ -20,9 +21,11 @@
   <h1>📄 仕様書リスト</h1>
   <input type="text" id="searchInput" placeholder="キーワードで検索" />
   <ul id="fileList">読み込み中...</ul>
+
   <script>
     const scriptUrl = "https://script.google.com/macros/s/AKfycbzO8rWtQem2fC5ySHgT1qACPnKknNdoNAgdrM8TYFKWdzDztB-o58jOFFp5M1gIpWEc/exec";
     let allFiles = [];
+
     fetch(scriptUrl)
       .then(res => res.json())
       .then(data => {
@@ -33,9 +36,24 @@
         document.getElementById("fileList").innerHTML = "取得に失敗しました";
         console.error(err);
       });
+
     function displayFiles(files) {
       const list = document.getElementById("fileList");
       list.innerHTML = "";
-      files.for
+      files.forEach(file => {
+        const li = document.createElement("li");
+        li.innerHTML = `<a href="${file.url}" target="_blank">${file.name}</a>`;
+        list.appendChild(li);
+      });
+    }
+
+    document.getElementById("searchInput").addEventListener("input", function () {
+      const keyword = this.value.toLowerCase();
+      const filtered = allFiles.filter(file => file.name.toLowerCase().includes(keyword));
+      displayFiles(filtered);
+    });
+  </script>
+</body>
+</html>
 
 
