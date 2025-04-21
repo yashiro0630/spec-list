@@ -1,0 +1,41 @@
+<iframe srcdoc='<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f9f9f9; }
+    input[type="text"] {
+      width: 100%; padding: 10px; margin-bottom: 20px;
+      font-size: 16px; border: 1px solid #ccc; border-radius: 6px;
+    }
+    ul { list-style: none; padding: 0; }
+    li {
+      margin-bottom: 12px; background: #fff; padding: 10px;
+      border-radius: 6px; box-shadow: 0 0 3px #ccc;
+    }
+    a { text-decoration: none; color: #007acc; }
+  </style>
+</head>
+<body>
+  <h1>📄 仕様書リスト</h1>
+  <input type="text" id="searchInput" placeholder="キーワードで検索" />
+  <ul id="fileList">読み込み中...</ul>
+  <script>
+    const scriptUrl = "https://script.google.com/macros/s/AKfycbzO8rWtQem2fC5ySHgT1qACPnKknNdoNAgdrM8TYFKWdzDztB-o58jOFFp5M1gIpWEc/exec";
+    let allFiles = [];
+    fetch(scriptUrl)
+      .then(res => res.json())
+      .then(data => {
+        allFiles = data;
+        displayFiles(data);
+      })
+      .catch(err => {
+        document.getElementById("fileList").innerHTML = "取得に失敗しました";
+        console.error(err);
+      });
+    function displayFiles(files) {
+      const list = document.getElementById("fileList");
+      list.innerHTML = "";
+      files.for
+
+
